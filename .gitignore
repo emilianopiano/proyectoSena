@@ -1,0 +1,13 @@
+# Ignorar el entorno virtual (carpeta del entorno virtual)
+venv/
+# Otras carpetas que podrían ser creadas por IDEs
+.vscode/
+.idea/
+
+# Ignorar archivos de configuración específicos de Python
+__pycache__/
+*.pyc
+
+# Ignorar archivos del sistema operativo (Mac/Linux/Windows)
+.DS_Store
+Thumbs.db
