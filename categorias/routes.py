@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from datetime import datetime
 from .models import Categoria, db
 
@@ -36,7 +36,7 @@ def agregar_categoria():
     return jsonify({"mensaje": "Categoría agregada exitosamente"}), 201
 
 # Ruta para listar todas las categorías (GET)
-@categorias_bp.route('/', methods=['GET'])
+@categorias_bp.route('/listar', methods=['GET'])
 def listar_categorias():
     categorias = Categoria.query.all()  # Obtener todas las categorías
     resultado = [
@@ -49,3 +49,8 @@ def listar_categorias():
         for categoria in categorias
     ]
     return jsonify(resultado)  # Devolver las categorías como JSON
+
+# Ruta para renderizar la página de gestión de categorías
+@categorias_bp.route('/')
+def gestionar_categorias():
+    return render_template('categorias.html')

@@ -1,6 +1,6 @@
 # app.py
 
-from flask import Flask
+from flask import Flask, render_template
 from extensions import db
 from categorias import categorias_bp
 from clientes.routes import clientes_bp
@@ -14,6 +14,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 # Registrar los Blueprints
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 app.register_blueprint(categorias_bp, url_prefix='/categorias')
 app.register_blueprint(clientes_bp, url_prefix='/clientes')
 app.register_blueprint(usuario_bp, url_prefix='/usuarios')  # Registrar rutas de usuarios

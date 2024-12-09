@@ -1,8 +1,14 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from datetime import datetime
 from .models import Cliente, db
 
+# Definir el Blueprint
 clientes_bp = Blueprint('clientes', __name__)
+
+
+@clientes_bp.route('/')
+def gestionar_clientes():
+    return render_template('clientes.html')
 
 # Ruta para agregar un nuevo cliente (POST)
 @clientes_bp.route('/agregar', methods=['POST'])
@@ -36,7 +42,6 @@ def agregar_cliente():
 
     return jsonify({"mensaje": "Cliente agregado exitosamente"}), 201
 
-
 # Ruta para listar todos los clientes (GET)
 @clientes_bp.route('/', methods=['GET'])
 def listar_clientes():
@@ -58,7 +63,6 @@ def listar_clientes():
         for cliente in clientes
     ]
     return jsonify(resultado)
-
 
 # Ruta para actualizar un cliente existente (PUT)
 @clientes_bp.route('/actualizar/<int:id>', methods=['PUT'])
@@ -85,7 +89,6 @@ def actualizar_cliente(id):
     db.session.commit()
 
     return jsonify({"mensaje": "Cliente actualizado exitosamente"})
-
 
 # Ruta para eliminar un cliente (DELETE)
 @clientes_bp.route('/eliminar/<int:id>', methods=['DELETE'])
